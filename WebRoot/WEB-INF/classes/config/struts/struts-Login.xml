@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>	    
+	  <!-- /***********************案例库模块**********************************/ -->
+	  <package name="LoginAction" namespace="/" extends="struts-default,json-default">  
+	       		
+	       		<interceptors >
+	       		    <interceptor name="auth" class="com.test.action.AuthInterceptor"></interceptor>
+	       		
+	       		    <interceptor-stack name="myStack">
+	       		    <interceptor-ref name="defaultStack"></interceptor-ref>
+	       		    <interceptor-ref name="auth"></interceptor-ref>
+	       		    </interceptor-stack>
+	       		</interceptors>
+	       		
+	       		<action name="LoginAction" class="LoginAction">
+	       		<result name="login">/login.jsp</result>
+	       	 	<result name="error">/login.jsp</result>
+	       		<!-- <result>/WEB-INF/page/manager.jsp</result>  -->
+	  			<result name="JSONRESULT" type="json">
+	  				<param name="root">result</param>
+	  			</result> 	
+	  		   </action>	
+	  		   
+	  		   <action name="RegisterAction" class="RegisterAction">
+	  			<result name="JSONRESULT" type="json">
+	  				<param name="root">result</param>
+	  			</result> 	
+	  		   </action>	
+	  		   
+	  		<action name="auth">
+	  		      	<interceptor-ref name="myStack"></interceptor-ref>
+	  		     <result name="login">/login.jsp</result>
+	  		   <result>/WEB-INF/page/manager.jsp</result>
+	  		</action>
+	  		
+	  		   <action name="UpdateAPKAction" class="UpdateAPKAction">
+	  			<result name="JSONRESULT" type="json">
+	  				<param name="root">result</param>
+	  			</result> 	
+	  		   </action>	
+	  		
+	  </package>	 
+	  
+</struts>
